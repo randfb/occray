@@ -55,7 +55,7 @@ if _SYS != 'Windows':
         searchPaths.append(os.environ['HOME'] + '/.blender/scripts/yafaray/')
         searchPaths.append('/usr/local/share/yafaray/blender/')
         searchPaths.append('/usr/share/yafaray/blender/')
-        searchPaths.append(Blender.Get('scriptsdir') + '/yafaray/')
+        #searchPaths.append(Blender.Get('scriptsdir') + '/yafaray/')
         for p in searchPaths:
             if os.path.exists(p):
                 sys.path.append(p)
