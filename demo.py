@@ -1,6 +1,7 @@
 from occray.scene import Scene
 from occray import light
 from occray import camera
+from occray import mesh
 
 from OCC.BRepPrimAPI import *
 from OCC.gp import *
@@ -16,10 +17,12 @@ scene = Scene(useXML=False)
 camera = camera.Perspective(position=(7.5,-6.5,5.3),to=(6.8,-5.9,4.8),up=(7.2,-6.2,6.2),res=(800,600))
 scene.camera = camera
 scene.add_shape(boxshp)
-scene.add_shape(sphereshp)
 scene.add_shape(floor)
 
-scene.add_light(light.PointLight(power=2.0,position=(4.0,3.0,6.0)))
-scene.add_light(light.PointLight(power=2.0,position=(-4.0,-5.0,1.0),color=(1.0,0.5,0.5)))
+sphere_mesh = mesh.Mesh(sphereshp,precision=0.05)
+scene.add_mesh(sphere_mesh)
+
+scene.add_light(light.PointLight(power=3.0,position=(4.0,3.0,6.0)))
+scene.add_light(light.PointLight(power=3.0,position=(-5.0,-5.0,1.0),color=(1.0,0.5,0.5)))
 
 scene.render()

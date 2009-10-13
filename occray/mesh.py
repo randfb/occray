@@ -18,10 +18,10 @@ from OCC.TColgp import *
 from OCC.gp import *
 
 class Mesh(object):
-    def __init__(self,shape,mMap):
-        self.materialMap = mMap
+    def __init__(self,shape,mat='defaultMat',precision=1.0):
+        self.material = mat
         self.shape = shape
-        BRepMesh().Mesh(shape,0.01)
+        BRepMesh().Mesh(shape,precision)
         self.vertices_list = []
         self.triangles_list = []
         self._analyze()
@@ -64,7 +64,7 @@ class Mesh(object):
     def nb_triangles(self):
         return len(self.triangles_list)
 
-    def createObject(self, yi):
+    def createObject(self, yi, materialMap):
         print "INFO: Adding Object: ",self.shape
         yi.paramsClearAll()
 
@@ -93,8 +93,8 @@ class Mesh(object):
 ##                smooth = True
             smooth = False
 
-            if meshlight: ymat = ml_mat
-            else:
+##            if meshlight: ymat = ml_mat
+##            else:
 ##                if renderer["clayRender"] == True:
 ##                    ymat = self.materialMap["default"]
 ##                elif obj.getType() == 'Curve':
@@ -114,7 +114,9 @@ class Mesh(object):
 ##                        ymat = self.materialMap["default"]
 ##                else:
 ##                    ymat = self.materialMap["default"]
-                ymat = self.materialMap["default"]
+##                ymat = self.materialMap["default"]
+
+            ymat = materialMap[self.material]
 
 
             if hasUV == True:

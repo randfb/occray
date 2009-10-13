@@ -42,17 +42,24 @@ class Scene(object):
 
         self.yi.loadPlugins(dllPath)
 
-        self.materialMap = dict()
+        self.materials = dict()
         #self.yTexture = yafTexture(self.yi)
         #self.yMaterial = yafMaterial(self.yi, self.materialMap)
         self.inputGamma = 1.0
 
     def add_shape(self,shape):
-        obj = occray.mesh.Mesh(shape,self.materialMap)
+        obj = occray.mesh.Mesh(shape)
+        self.objects.append(obj)
+        return obj
+
+    def add_mesh(self,obj):
         self.objects.append(obj)
 
     def add_light(self,light):
         self.lights.append(light)
+
+    def add_material(self,material):
+        self.materials[material.name] = material
 
     def render(self):
         self.startScene()
@@ -75,7 +82,7 @@ class Scene(object):
         self.yi.paramsSetString("type", "shinydiffusemat")
         print "INFO: Adding Material: defaultMat"
         ymat = self.yi.createMaterial("defaultMat")
-        self.materialMap["default"] = ymat
+        self.materials["defaultMat"] = ymat
 
     def writeLights(self):
         for light in self.lights:
@@ -87,7 +94,7 @@ class Scene(object):
     def writeObjects(self):
         print "INFO: Adding Objects"
         for obj in self.objects:
-            obj.createObject(self.yi)
+            obj.createObject(self.yi,self.materials)
 
     def writeBackground(self):
         self.background.createBackground(self.yi)
