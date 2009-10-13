@@ -53,8 +53,8 @@ class Scene(object):
         #self.yMaterial = yafMaterial(self.yi, self.materialMap)
         self.inputGamma = 1.0
 
-    def add_shape(self,shape):
-        obj = occray.mesh.Mesh(shape)
+    def add_shape(self,shape,precision=1.0):
+        obj = occray.mesh.Mesh(shape,precision=precision)
         self.objects.append(obj)
         return obj
 
