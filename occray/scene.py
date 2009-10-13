@@ -5,6 +5,7 @@ import occray.background
 import occray.renderer
 import occray.camera
 import occray.mesh
+import occray.material
 
 import os
 
@@ -43,6 +44,11 @@ class Scene(object):
         self.yi.loadPlugins(dllPath)
 
         self.materials = dict()
+        self.materialMap = dict()
+        #add default material
+        defaultMat = occray.material.Material()
+        self.add_material(defaultMat)
+
         #self.yTexture = yafTexture(self.yi)
         #self.yMaterial = yafMaterial(self.yi, self.materialMap)
         self.inputGamma = 1.0
@@ -78,11 +84,9 @@ class Scene(object):
 
     def writeMaterials(self):
         print "INFO: Adding Materials"
-        self.yi.paramsClearAll()
-        self.yi.paramsSetString("type", "shinydiffusemat")
-        print "INFO: Adding Material: defaultMat"
-        ymat = self.yi.createMaterial("defaultMat")
-        self.materials["defaultMat"] = ymat
+        for name,material in self.materials.items():
+            ymat = material.createMaterial(self.yi)
+            self.materialMap[name] = ymat
 
     def writeLights(self):
         for light in self.lights:
@@ -94,7 +98,7 @@ class Scene(object):
     def writeObjects(self):
         print "INFO: Adding Objects"
         for obj in self.objects:
-            obj.createObject(self.yi,self.materials)
+            obj.createObject(self.yi,self.materialMap)
 
     def writeBackground(self):
         self.background.createBackground(self.yi)

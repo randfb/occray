@@ -5,12 +5,12 @@ class Renderer(object):
     def __init__(self):
         self.gammaInput = 1.8
         self.drawParams = 0
-        self.customString = 'test SR'
+        self.customString = ''
         self.AA_passes = 1
         self.AA_inc_samples = 1
         self.AA_minsamples = 1
         self.filter_type = 'box'
-        self.AA_pixelwidth = 1.5
+        self.AA_pixelwidth = 1
         self.AA_threshold = 0.05
         self.raydepth = 2
         self.shadowDepth = 2

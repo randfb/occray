@@ -19,7 +19,10 @@ from OCC.gp import *
 
 class Mesh(object):
     def __init__(self,shape,mat='defaultMat',precision=1.0):
-        self.material = mat
+        if isinstance(mat,str):
+            self.material = mat
+        else:
+            self.material = mat.name
         self.shape = shape
         BRepMesh().Mesh(shape,precision)
         self.vertices_list = []
