@@ -37,11 +37,11 @@ class Scene(object):
                  'sizeY':600,
                  'renderwinSize':100.0,
                 }
-    def __init__(self,objects=[],useXML=False):
+    def __init__(self,useXML=False):
         self.background = occray.background.ConstantBackground()
         self.renderer = occray.renderer.Renderer()
         self.camera = occray.camera.Perspective()
-        self.objects = objects
+        self.objects = []
         self.lights = []
 
         self.haveQt = True

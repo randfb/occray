@@ -15,7 +15,7 @@
 ##    You should have received a copy of the GNU General Public License
 ##    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from occray.scene import Scene
+from occray import scene
 from occray import light
 from occray import camera
 from occray import mesh
@@ -26,12 +26,13 @@ from OCC.gp import *
 
 
 boxshp = BRepPrimAPI_MakeBox(2.,2.,2.).Shape()
-boxshp2 = BRepPrimAPI_MakeBox(gp_Pnt(3,-2,0),0.5,0.5,2.).Shape()
+boxshp2 = BRepPrimAPI_MakeBox(gp_Pnt(3,-2,0.5),0.5,0.5,3).Shape()
 sphereshp = BRepPrimAPI_MakeSphere(gp_Pnt(2,-2,1),1).Shape()
+sphereshp2 = BRepPrimAPI_MakeSphere(gp_Pnt(-1,-4,0.5),0.5).Shape()
 floor = BRepPrimAPI_MakeBox(gp_Pnt(-50,-50,0),100.,100.,0.1).Shape()
 
 
-scene = Scene(useXML=False)
+scene = scene.Scene(useXML=False)
 
 scene.renderer.AA_minsamples = 4
 scene.renderer.caustics = True
@@ -44,8 +45,11 @@ scene.add_shape(floor)
 glass_mat = material.Glass('glassmat')
 scene.add_material(glass_mat)
 
-sphere_mesh = mesh.Mesh(sphereshp,glass_mat,precision=0.01)
+sphere_mesh = mesh.Mesh(sphereshp,precision=0.01)
 scene.add_mesh(sphere_mesh)
+
+sphere_mesh2 = mesh.Mesh(sphereshp2,glass_mat,precision=0.01)
+scene.add_mesh(sphere_mesh2)
 
 
 box_mesh = mesh.Mesh(boxshp2,glass_mat,0.1)
