@@ -43,7 +43,8 @@ class Light(object):
         yi.paramsClearAll()
         yi.paramsSetString("type", self.type)
         self._create(yi)
-        yi.paramsSetPoint("from",  self.position[0],  self.position[1],  self.position[2])
+        if not self.position is None:
+            yi.paramsSetPoint("from",  self.position[0],  self.position[1],  self.position[2])
         yi.paramsSetColor("color", self.color[0], self.color[1], self.color[2])
         yi.createLight(self.name)
 

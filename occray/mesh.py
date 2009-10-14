@@ -83,7 +83,7 @@ class Mesh(object):
         return len(self.triangles_list)
 
     def createObject(self, yi, materialMap):
-        print "INFO: Adding Object: ",self.shape
+        print "INFO: Adding Object: ",self,self.shape
         yi.paramsClearAll()
 
         ID = yafrayinterface.new_uintp()

@@ -323,7 +323,7 @@ class Scene(object):
                 yi.paramsSetBool("do_AO", self.renderer.do_AO)
                 yi.paramsSetInt("AO_samples", self.renderer.AO_samples)
                 yi.paramsSetFloat("AO_distance", self.renderer.AO_distance)
-                c = renderer["AO_color"];
+                c = self.renderer.AO_color;
                 yi.paramsSetColor("AO_color", c[0], c[1], c[2])
                 ss += ", AO (samples: " + str(renderer["AO_samples"]) + ")";
         elif "Photon mapping" == light_type:

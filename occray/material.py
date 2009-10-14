@@ -45,14 +45,14 @@ class Glass(Material):
         self.filter_color = (1.0,1.0,1.0)
         self.transmit_filter = 0.0
         self.mirror_color = (1.0,1.0,1.0)
-        self.absorption = (0,0,0)
+        self.absorption = (1.0,1.0,1.0)
         self.absorption_dist = 0
         self.dispersion_power = 0
         self.bump_shader = ''
         self.mirror_color_shader = ''
         self.fake_shadows = False
 
-	def _create(self, yi):
+    def _create(self, yi):
 		yi.paramsSetFloat("IOR", self.IOR)
 		yi.paramsSetColor("filter_color", self.filter_color[0], self.filter_color[1], self.filter_color[2])
 		yi.paramsSetColor("mirror_color", self.mirror_color[0], self.mirror_color[1], self.mirror_color[2])

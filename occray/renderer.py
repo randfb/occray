@@ -33,6 +33,8 @@ class Renderer(object):
         self.lightType = 'Direct lighting'
         self.caustics = False
         self.do_AO = False
+        self.AO_samples = 2
+        self.AO_distance = 1
 
         self.gamma = 1.8
         self.clamp_rgb = False
@@ -40,3 +42,8 @@ class Renderer(object):
 
         self.xml = False
         self.autoSave = True
+
+        self.photons = 500000
+        self.caustic_mix = 100
+        self.caustic_depth = 10
+        self.caustic_radius = 0.25
