@@ -45,7 +45,7 @@ myscene.add_shape(boxshp)
 myscene.add_shape(floor)
 
 glass_mat = material.Glass('glassmat')
-scene.add_material(glass_mat)
+myscene.add_material(glass_mat)
 
 sphere_mesh = mesh.Mesh(sphereshp,precision=0.01)
 myscene.add_mesh(sphere_mesh)
