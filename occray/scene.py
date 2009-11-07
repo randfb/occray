@@ -71,6 +71,9 @@ class Scene(object):
     def add_shape(self,shape,precision=1.0):
         obj = occray.mesh.Mesh(shape,precision=precision)
         self.objects.append(obj)
+
+    def add_mesh(self,mesh):
+	self.objects.append(mesh)
         return obj
 
     def add_mesh(self,obj):

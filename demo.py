@@ -19,6 +19,7 @@ from occray import scene
 from occray import light
 from occray import camera
 from occray import mesh
+from occray import mesh
 from occray import material
 
 from OCC.BRepPrimAPI import *
@@ -32,33 +33,34 @@ sphereshp2 = BRepPrimAPI_MakeSphere(gp_Pnt(-1,-4,0.5),0.5).Shape()
 floor = BRepPrimAPI_MakeBox(gp_Pnt(-50,-50,0),100.,100.,0.1).Shape()
 
 
-scene = scene.Scene(useXML=False)
+myscene = scene.Scene(useXML=False)
 
-scene.renderer.AA_minsamples = 4
-scene.renderer.caustics = True
+myscene.renderer.AA_minsamples = 4
+myscene.renderer.caustics = True
+myscene.renderer.threads = 2
 
 camera = camera.Perspective(position=(7.5,-6.5,5.3),to=(6.8,-5.9,4.8),up=(7.2,-6.2,6.2),res=(800,600))
-scene.camera = camera
-scene.add_shape(boxshp)
-scene.add_shape(floor)
+myscene.camera = camera
+myscene.add_shape(boxshp)
+myscene.add_shape(floor)
 
 glass_mat = material.Glass('glassmat')
 scene.add_material(glass_mat)
 
 sphere_mesh = mesh.Mesh(sphereshp,precision=0.01)
-scene.add_mesh(sphere_mesh)
+myscene.add_mesh(sphere_mesh)
 
 sphere_mesh2 = mesh.Mesh(sphereshp2,glass_mat,precision=0.01)
-scene.add_mesh(sphere_mesh2)
+myscene.add_mesh(sphere_mesh2)
 
 
 box_mesh = mesh.Mesh(boxshp2,glass_mat,0.1)
-scene.add_mesh(box_mesh)
+myscene.add_mesh(box_mesh)
 
 
 
-scene.add_light(light.PointLight(power=5.0,position=(4.0,3.0,6.0)))
-scene.add_light(light.PointLight(power=5.0,position=(-3.0,-2.0,2),color=(1.0,0.5,0.5)))
+myscene.add_light(light.PointLight(power=5.0,position=(4.0,3.0,6.0)))
+myscene.add_light(light.PointLight(power=5.0,position=(-3.0,-2.0,2),color=(1.0,0.5,0.5)))
 #scene.add_light(light.SunLight(power=1.0,direction=(0,0.5,0.5),samples=10))
 
-scene.render()
+myscene.render()
