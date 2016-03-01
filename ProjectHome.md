@@ -1,0 +1,1 @@
+This project is a python library for making realistic images from 3D models using pythonOCC and Yafaray.
